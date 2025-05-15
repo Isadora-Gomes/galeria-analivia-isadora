@@ -3,20 +3,19 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import RealizarLogin from './src/screens/realizarLogin';
+import RealizarLogin from './src/screens/RealizarLogin';
 import PaginaPrincipal from './src/screens/paginaPrincipal';
-import EditarPerfil from './src/screens/editarPerfil';
+import EditarPerfil from './src/screens/Perfil';
 
-import ListarImagens from './src/screens/listarImg';
-import UploadImagens from './src/screens/uploadImg';
-import ListarVideos from './src/screens/listarVideo';
-import UploadVideos from './src/screens/uploadVideo';
+import ListarImagens from './src/screens/ListarImg';
+import UploadImagens from './src/screens/UploadImg';
+import ListarVideos from './src/screens/ListarVideos';
+import UploadVideos from './src/screens/UploadVideo';
 
-import AdicionarUser from './src/screens/adicionarUsuario';
+import Cadastro from './src/screens/Cadastro';
 
 const Stack = createNativeStackNavigator();
 const App = () => (
-// name é a identificação da tela
   <NavigationContainer>
     <Stack.Navigator initialRouteName='RealizarLogin' screenOptions={{ headerShown: false }}>
       <Stack.Screen name="RealizarLogin" component={RealizarLogin} /> 
@@ -26,7 +25,7 @@ const App = () => (
       <Stack.Screen name="UploadImagens" component={UploadImagens} />
       <Stack.Screen name="ListarVideos" component={ListarVideos} />
       <Stack.Screen name="UploadVideos" component={UploadVideos} />
-      <Stack.Screen name="AdicionarUser" component={AdicionarUser} />
+      <Stack.Screen name="Cadastro" component={Cadastro} />
     </Stack.Navigator>
   </NavigationContainer>
 );
