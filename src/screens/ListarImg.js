@@ -71,8 +71,24 @@ useEffect(() => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Olá, React Native!</Text>
-    </View>
+    {loading ? (
+      <ActivityIndicator size="large" color="#0000ff" />
+    ) : imagens.length === 0 ? (
+      <Text style={styles.text}>Nenhuma imagem encontrada.</Text>
+    ) : (
+      <ScrollView contentContainerStyle={styles.scrollContainer}>
+        {imagens.map((img, index) => (
+          <View key={index} style={styles.imageContainer}>
+            <Image source={{ uri: img.url }} style={styles.image} />
+            <Text style={styles.imageName}>{img.name}</Text>
+          </View>
+        ))}
+      </ScrollView>
+    )}
+    <Pressable onPress={fetchImagens} style={styles.button}>
+      <Text style={styles.buttonText}>Recarregar</Text>
+    </Pressable>
+  </View>
   );
 }
 export default ListarImagens;
