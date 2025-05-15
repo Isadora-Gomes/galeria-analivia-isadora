@@ -1,22 +1,22 @@
+import React, { useState } from "react";
 import * as DocumentPicker from "expo-document-picker";
-import { Picker } from "@react-native-picker/picker";
 import { supabase } from '../../supabaseConfig';
 import * as Filesystem from "expo-file-system";
-import { useState } from "react";
 import {
   View,
   Text,
+  Pressable,
   Alert,
-  ActivityIndicator,
+  Modal,
+  TextInput,
   StyleSheet,
-  TouchableOpacity,
 } from "react-native";
 
 export default function UploadVideo({ navigation }) {
   const [video, setVideo] = useState(null);
-  const [category, setCategory] = useState("matematica");
-  const [categories, setCategories] = useState(["matematica"]);
+  const [category, setCategory] = useState("");
   const [uploading, setUploading] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
 
   const pickVideo = async () => {
     try {
@@ -34,6 +34,7 @@ export default function UploadVideo({ navigation }) {
           uri: asset.uri,
         };
         setVideo(selectedVideo);
+        setModalVisible(true);
       } else {
         Alert.alert("Erro", "Nenhum vídeo selecionado.");
       }
@@ -45,11 +46,12 @@ export default function UploadVideo({ navigation }) {
 
   const uploadVideo = async () => {
     if (!video || !category) {
-      Alert.alert("Erro", "Por favor, selecione um vídeo e uma categoria");
+      Alert.alert("Erro", "Por favor, selecione um vídeo e uma categoria.");
       return;
     }
 
     setUploading(true);
+    setModalVisible(false);
 
     try {
       const timestamp = new Date().getTime();
@@ -89,38 +91,53 @@ export default function UploadVideo({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Upload de Vídeo</Text>
-
-      <Text style={styles.label}>Selecione a categoria:</Text>
-      <Picker
-        selectedValue={category}
-        onValueChange={(value) => setCategory(value)}
-        style={styles.picker}
-      >
-        {categories.map((cat) => (
-          <Picker.Item key={cat} label={cat} value={cat} />
-        ))}
-      </Picker>
+      <Pressable style={styles.botao} onPress={pickVideo}>
+        <Text style={styles.botaoTexto}>Selecionar Vídeo</Text>
+      </Pressable>
 
       {video && (
-        <Text style={styles.videoName}>🎬 {video.name}</Text>
+        <View style={styles.videoInfo}>
+          <Text style={styles.videoText}>Vídeo selecionado: {video.name}</Text>
+        </View>
       )}
 
-      <TouchableOpacity style={styles.button} onPress={pickVideo}>
-        <Text style={styles.buttonText}>Selecionar Vídeo</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity
-        style={[styles.button, { backgroundColor: "#28a745" }]}
-        onPress={uploadVideo}
-        disabled={uploading}
+      <Modal
+        visible={modalVisible}
+        animationType="slide"
+        transparent
+        onRequestClose={() => setModalVisible(false)}
       >
-        <Text style={styles.buttonText}>
-          {uploading ? "Enviando..." : "Fazer Upload"}
-        </Text>
-      </TouchableOpacity>
+        <View style={styles.modalOverlay}>
+          <View style={styles.modalContainer}>
+            <Text style={styles.modalTitulo}>Digite a categoria do vídeo:</Text>
+            <TextInput
+              value={category}
+              onChangeText={setCategory}
+              placeholder="Categoria"
+              style={styles.input}
+            />
+            <Pressable
+              style={styles.botao}
+              onPress={uploadVideo}
+            >
+              <Text style={styles.botaoTexto}>Enviar Vídeo</Text>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
 
-      {uploading && <ActivityIndicator size="large" color="#0000ff" style={{ marginTop: 20 }} />}
+      {uploading && (
+        <View style={styles.uploadingContainer}>
+          <Text style={styles.uploadingText}>Enviando vídeo...</Text>
+        </View>
+      )}
+
+      <Pressable
+        style={styles.logoutBotao}
+        onPress={() => navigation.navigate("PaginaPrincipal")}
+      >
+        <Text style={styles.textBotaoOut}>Voltar</Text>
+      </Pressable>
     </View>
   );
 }
@@ -129,41 +146,78 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-    backgroundColor: "#f4f4f4",
-    justifyContent: "center",
+    justifyContent: 'center',
+    backgroundColor: '#8058ac',
   },
-  title: {
-    fontSize: 24,
-    fontWeight: "bold",
+  botao: {
+    backgroundColor: '#ded9f6',
+    paddingVertical: 18,
+    paddingHorizontal: 10,
+    borderRadius: 10,
+    alignItems: 'center',
     marginBottom: 20,
-    alignSelf: "center",
   },
-  label: {
-    fontSize: 16,
-    marginBottom: 8,
+  botaoTexto: {
+    color: '#2e0f48',
+    fontSize: 19,
+    fontWeight: 'bold',
+    fontFamily: 'Gotham, sans-serif',
   },
-  picker: {
-    backgroundColor: "#fff",
-    borderRadius: 8,
-    marginBottom: 16,
-  },
-  button: {
-    backgroundColor: "#007bff",
-    paddingVertical: 12,
-    paddingHorizontal: 20,
-    borderRadius: 8,
+  videoInfo: {
     marginTop: 10,
-    alignItems: "center",
+    alignItems: 'center',
   },
-  buttonText: {
-    color: "#fff",
-    fontWeight: "600",
+  videoText: {
     fontSize: 16,
+    color: '#333',
+    fontFamily: 'Gotham, sans-serif',
   },
-  videoName: {
-    marginTop: 10,
+  modalOverlay: {
+    flex: 1,
+    justifyContent: 'center',
+    backgroundColor: 'rgba(0,0,0,0.5)',
+  },
+  modalContainer: {
+    margin: 20,
+    backgroundColor: 'white',
+    borderRadius: 10,
+    padding: 20,
+  },
+  modalTitulo: {
+    marginBottom: 10,
     fontSize: 16,
-    fontStyle: "italic",
-    color: "#555",
+    fontWeight: '500',
+    fontFamily: 'Gotham, sans-serif',
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: '#ccc',
+    padding: 12,
+    borderRadius: 5,
+    marginBottom: 20,
+  },
+  uploadingContainer: {
+    marginTop: 20,
+    alignItems: 'center',
+  },
+  uploadingText: {
+    fontSize: 16,
+    color: '#666',
+  },
+  logoutBotao: {
+    backgroundColor: 'red',
+    borderRadius: 10,
+    padding: 7,
+    width: 100,
+    alignSelf: 'center',
+    marginTop: 120,
+    marginBottom: 30,
+  },
+  textBotaoOut: {
+    textAlign: 'center',
+    fontFamily: 'Gotham, sans-serif',
+    color: 'white',
+    fontWeight: '400',
+    fontSize: 18,
   },
 });

@@ -17,7 +17,7 @@ import Cadastro from './src/screens/Cadastro';
 const Stack = createNativeStackNavigator();
 const App = () => (
   <NavigationContainer>
-    <Stack.Navigator initialRouteName='RealizarLogin' screenOptions={{ headerShown: false }}>
+    <Stack.Navigator initialRouteName='UploadVideos' screenOptions={{ headerShown: false }}>
       <Stack.Screen name="RealizarLogin" component={RealizarLogin} /> 
       <Stack.Screen name="PaginaPrincipal" component={PaginaPrincipal} />
       <Stack.Screen name="EditarPerfil" component={EditarPerfil} />
