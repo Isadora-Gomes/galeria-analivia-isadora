@@ -14,9 +14,9 @@ import * as FileSystem from "expo-file-system";
 import * as Notifications from "expo-notifications";
 
 // Função para registrar o usuário
-const registerUser = async (email, password, nome, imageUri) => {
-    try {
-        await supabase.auth.signOut();
+const registerUser = async (email, password, nome_user, imageUri) => {
+  try {
+    await supabase.auth.signOut();
 
         const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
             email,
@@ -51,9 +51,9 @@ const registerUser = async (email, password, nome, imageUri) => {
 
         const photoURL = publicUrlData.publicUrl;
 
-        const { error: dbError } = await supabase
-            .from("users")
-            .insert([{ id: userId, nome, email, photo_url: photoURL }]);
+    const { error: dbError } = await supabase
+      .from("users")
+      .insert([{ id_user: userId, nome_user, photoUrl_user: photoURL, email }]);
 
         if (dbError) throw dbError;
 
