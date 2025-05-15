@@ -26,8 +26,8 @@ const UploadImagens = ({ navigation }) => {
 
       if (!result.canceled && result.assets && result.assets[0].uri) {
         const selectedUri = result.assets[0].uri;
-        setImageUri(selectedUri); // Exibe a imagem no app
-        await uploadImg(selectedUri); // Envia para o Supabase
+        setImageUri(selectedUri); 
+        await uploadImg(selectedUri);
         return selectedUri;
       }
 
