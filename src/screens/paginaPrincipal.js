@@ -1,4 +1,4 @@
-// Isadora Gomes da Silva
+// Isadora Gomes da Silva e Ana Lívia Lopes 
 import React from 'react';
 import { View, Text, Pressable, StyleSheet, ScrollView } from 'react-native';
 
