@@ -1,20 +1,32 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+// Isadora Gomes da Silva
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+import RealizarLogin from './src/screens/RealizarLogin';
+import PaginaPrincipal from './src/screens/paginaPrincipal';
+import EditarPerfil from './src/screens/Perfil';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+import ListarImagens from './src/screens/ListarImg';
+import UploadImagens from './src/screens/UploadImg';
+import ListarVideos from './src/screens/ListarVideos';
+import UploadVideos from './src/screens/UploadVideo';
+
+import Cadastro from './src/screens/Cadastro';
+
+const Stack = createNativeStackNavigator();
+const App = () => (
+  <NavigationContainer>
+    <Stack.Navigator initialRouteName='RealizarLogin' screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="RealizarLogin" component={RealizarLogin} /> 
+      <Stack.Screen name="PaginaPrincipal" component={PaginaPrincipal} />
+      <Stack.Screen name="EditarPerfil" component={EditarPerfil} />
+      <Stack.Screen name="ListarImagens" component={ListarImagens} />
+      <Stack.Screen name="UploadImagens" component={UploadImagens} />
+      <Stack.Screen name="ListarVideos" component={ListarVideos} />
+      <Stack.Screen name="UploadVideos" component={UploadVideos} />
+      <Stack.Screen name="Cadastro" component={Cadastro} />
+    </Stack.Navigator>
+  </NavigationContainer>
+);
+export default App;
