@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Pressable, StyleSheet, Image} from 'react-native';
+import { View, Text, TextInput, Pressable, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { supabase } from '../../supabaseConfig';
 
 
@@ -20,57 +20,66 @@ const RealizarLogin = ({ navigation }) => {
             window.alert('Login realizado com sucesso!');
             navigation.navigate('PaginaPrincipal');
         }
-
     }
-    return( 
+    const redirecionarCadastro = () => {
+        navigation.navigate("Cadastro")
+    }
+    return (
         <View style={styles.container}>
-            <Image source={require('../../assets/galeria.png')} style={styles.img}/>
-            
-            <TextInput style={styles.input}
-            placeholder='Email' 
-            onChangeText={setEmail} 
-            value={email}
-            placeholderTextColor={"#8058ac"} />
+            <Image source={require('../../assets/galeria.png')} style={styles.img} />
 
             <TextInput style={styles.input}
-            secureTextEntry={true} 
-            placeholder='Senha' 
-            onChangeText={setPassword} 
-            value={password} 
-            placeholderTextColor={"#8058ac"} />
+                placeholder='Email'
+                onChangeText={setEmail}
+                value={email}
+                placeholderTextColor={"#4169E1"} />
 
-            <Pressable style={styles.botao} onPress={handleLogin}> 
-                <Text style={styles.textBotao}>Entrar</Text> 
+            <TextInput style={styles.input}
+                secureTextEntry={true}
+                placeholder='Senha'
+                onChangeText={setPassword}
+                value={password}
+                placeholderTextColor={"#4169E1"} />
+
+            <Pressable style={styles.botao} onPress={handleLogin}>
+                <Text style={styles.textBotao}>Entrar</Text>
             </Pressable>
+            <View style={styles.textCadastro}>
+                <TouchableOpacity onPress={redirecionarCadastro}>
+                    <Text style={styles.linkCadastro}>
+                        Não tem uma conta? <Text style={styles.linkDestacado}>Cadastre-se</Text>
+                    </Text>
+                </TouchableOpacity>
+            </View>
         </View>
     );
 }
 const styles = StyleSheet.create({
-    container:{
+    container: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#ded9f6',
+        backgroundColor: '#D9EAFD',
     },
-    input:{
+    input: {
         fontFamily: 'Gotham',
         height: 47,
-        width:350,
+        width: 350,
         margin: 12,
         borderWidth: 3,
         padding: 12,
         borderRadius: 10,
-        borderColor: '#8058ac',
+        borderColor: '#4169E1',
     },
-    botao:{
-        backgroundColor: '#8058ac',
+    botao: {
+        backgroundColor: '#4169E1',
         borderRadius: 10,
         padding: 12,
         width: 125,
         gap: 5,
         marginTop: 15,
     },
-    textBotao:{
+    textBotao: {
         textAlign: 'center',
         marginRight: 'auto',
         marginLeft: 'auto',
@@ -79,10 +88,28 @@ const styles = StyleSheet.create({
         fontWeight: 500,
         fontSize: 20,
     },
-    img:{
+    img: {
         width: 170,
-        height: 76,
-        margin: 30,
+        height: 185,
+        marginTop: 40,
+    },
+    textCadastro: {
+        marginTop: 100,
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: '100%',
+        height: 60,
+    },
+    
+    linkCadastro: {
+        fontFamily: 'Gotham',
+        fontSize: 16,
+        color: '#000',
+    },
+
+    linkDestacado: {
+        color: '#2c2dd7',
+        textDecorationLine: 'underline',
     },
 });
 export default RealizarLogin;
