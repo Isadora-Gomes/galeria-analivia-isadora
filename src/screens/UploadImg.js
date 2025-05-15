@@ -60,6 +60,7 @@ const UploadImagens = ({ navigation }) => {
 
       const validExtensions = ["jpg", "jpeg", "png", "gif", "webp"];
       if (!validExtensions.includes(fileExt)) fileExt = "jpg";
+    
 
       const filename = `${user.id}+${timestamp}.${fileExt}`;
       const filePath = `galeria/${user.id}/${filename}`;
