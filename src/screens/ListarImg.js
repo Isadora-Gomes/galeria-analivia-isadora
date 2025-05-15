@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, ScrollView, Text, Image, ActivityIndicator, Pressable } from 'react-native';
+import { supabase } from '../../supabaseConfig';
 
 const ListarImagens = ({ navigation }) =>  {
   const [imagens, setImagens] = useState([]);

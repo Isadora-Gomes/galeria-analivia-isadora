@@ -7,20 +7,22 @@ const RealizarLogin = ({ navigation }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const handleLogin = async (email, password) => {
+    const handleLogin = async () => {
         const { data, error } = await supabase.auth.signInWithPassword({
-            email: email,
-            password: password,
-        })
-
+            email,
+            password
+        });
+    
         if (error) {
-            console.error('Login error:', error)
-        } else {
-            console.log('Login success:', data)
-            window.alert('Login realizado com sucesso!');
-            navigation.navigate('PaginaPrincipal');
+            console.log('Erro ao fazer login:', error.message);
+            return;
         }
-    }
+    
+        console.log('Usuário logado:', data.user);
+    
+        navigation.navigate("PaginaPrincipal");
+    };
+
     const redirecionarCadastro = () => {
         navigation.navigate("Cadastro")
     }

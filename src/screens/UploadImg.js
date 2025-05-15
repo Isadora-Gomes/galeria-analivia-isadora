@@ -56,6 +56,7 @@ const UploadImagens = ({ navigation }) => {
       const timestamp = new Date().getTime();
       let fileExt = uri.split(".").pop().toLowerCase();
       if (!fileExt || fileExt.length > 4) fileExt = "jpg";
+      console.log(fileExt);
 
       const validExtensions = ["jpg", "jpeg", "png", "gif", "webp"];
       if (!validExtensions.includes(fileExt)) fileExt = "jpg";
@@ -124,33 +125,33 @@ const styles = StyleSheet.create({
     flex: 1, 
     justifyContent: "center", 
     alignItems: "center",
-    backgroundColor: '#8058ac',
-  },
-  button: {
-    backgroundColor: '#ded9f6',
+    backgroundColor: '#D9EAFD',
+},
+button: {
+    backgroundColor: '#4169E1',
     paddingVertical: 18,
     paddingHorizontal: 20,
     borderRadius: 8,
     marginVertical: 10,
   },
   buttonText: {
-    color: '#2e0f48',
+    color: '#F0F8FF',
     fontSize: 19,
     fontWeight: "bold",
   },
   image: {
     width: 200,
     height: 200,
-    marginVertical: 20,
     borderRadius: 10,
+    alignItems: 'center',
   },
   logoutBotao: {
-    backgroundColor: 'red',
+    backgroundColor: '#001A6E',
     borderRadius: 10,
     padding: 7,
     width: 100,
-    alignSelf: 'center',
-    marginTop: 120,
+    alignItems: "center",
+    marginTop: 20,
     marginBottom: 30,
 },
 textBotaoOut: {

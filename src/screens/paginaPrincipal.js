@@ -4,12 +4,15 @@ import { View, Text, Pressable, StyleSheet, ScrollView } from 'react-native';
 
 const PaginaPrincipal = ({ navigation }) => {
     return (
-        <ScrollView>
             <View style={styles.container}>
-                {/* <Text style={styles.text1}>Bem-vindo ao SESI!</Text> */}
+                <Text style={styles.text1}>Bem-vindo a galeria!</Text>
 
                 <Pressable style={styles.botao} onPress={() => navigation.navigate('EditarPerfil')}>
                     <Text style={styles.textBotao}>Editar perfil</Text>
+                </Pressable>
+
+                <Pressable style={styles.botao} onPress={() => navigation.navigate('ListarImagens')}>
+                    <Text style={styles.textBotao}>Listar imagens</Text>
                 </Pressable>
 
                 <Pressable style={styles.botao} onPress={() => navigation.navigate('UploadImagens')}>
@@ -28,7 +31,6 @@ const PaginaPrincipal = ({ navigation }) => {
                     <Text style={styles.textBotao}>Sair</Text>
                 </Pressable>
             </View>
-        </ScrollView>
     );
 };
 export default PaginaPrincipal;
@@ -38,7 +40,8 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#8058ac',
+        backgroundColor: '#4169E1',
+        height: 1000
     },
     text1: {
         fontFamily: 'Gotham, sans-serif',
@@ -46,17 +49,17 @@ const styles = StyleSheet.create({
         fontSize: 40,
         fontWeight: 'bold',
         margin: 40,
-        color: '#ded9f6',
+        color: '#F0F8FF',
 
     },
     botao: {
-        backgroundColor: '#ded9f6',
+        backgroundColor: '#F0F8FF',
         borderRadius: 10,
-        padding: 12,
-        width: 225,
-        height: 50,
-        gap: 5,
-        marginBottom: 6,
+        padding: 14,
+        width: 210,
+        height: 55,
+        gap: 35,
+        marginBottom: 20,
         marginTop: 15,
     },
     textBotao: {
@@ -64,7 +67,7 @@ const styles = StyleSheet.create({
         marginRight: 'auto',
         marginLeft: 'auto',
         fontFamily: 'Gotham',
-        color: '#2e0f48',
+        color: '#001A6E',
         fontWeight: 500,
         fontSize: 20,
     },
