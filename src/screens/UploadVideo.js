@@ -147,10 +147,10 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     justifyContent: 'center',
-    backgroundColor: '#8058ac',
+    backgroundColor: '#D9EAFD',
   },
   botao: {
-    backgroundColor: '#ded9f6',
+    backgroundColor: '#4169E1',
     paddingVertical: 18,
     paddingHorizontal: 10,
     borderRadius: 10,
@@ -158,7 +158,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   botaoTexto: {
-    color: '#2e0f48',
+    color: '#fff',
     fontSize: 19,
     fontWeight: 'bold',
     fontFamily: 'Gotham, sans-serif',
