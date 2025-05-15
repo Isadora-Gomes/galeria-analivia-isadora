@@ -24,7 +24,7 @@ const RealizarLogin = ({ navigation }) => {
     }
     return( 
         <View style={styles.container}>
-            <Image source={require('../../assets/img/sesir.png')} style={styles.img}/>
+            <Image source={require('../../assets/galeria.png')} style={styles.img}/>
             
             <TextInput style={styles.input}
             placeholder='Email' 
