@@ -107,7 +107,7 @@ const UploadImagens = ({ navigation }) => {
       {imageUri && (
         <View>
           <Image source={{ uri: imageUri }} style={styles.image} />
-          <Pressable style={styles.button} onPress={uploadImg}>
+          <Pressable style={styles.button} onPress={() => uploadImg(imageUri)}>
             <Text style={styles.buttonText}>Fazer upload da imagem</Text>
           </Pressable>
         </View>

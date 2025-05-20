@@ -3,7 +3,7 @@ import { supabase } from '../../supabaseConfig';
 import * as ImagePicker from "expo-image-picker";
 import * as FileSystem from "expo-file-system";
 import React, { useEffect, useState } from "react";
-import { Alert, StyleSheet, View, TouchableOpacity, Text, TextInput } from "react-native";
+import { Alert, StyleSheet, View, TouchableOpacity, Text, TextInput, ActivityIndicator } from "react-native";
 
 const EditarPerfil = ({ navigation }) => {
   const [nome, setNome] = useState("");
@@ -29,8 +29,8 @@ const EditarPerfil = ({ navigation }) => {
       // Agora buscamos os dados completos da tabela "users"
       const { data: userData, error: userError } = await supabase
         .from("users")
-        .select("nome, photo_url")
-        .eq("id", user.id)
+        .select("nome_user, photoUrl_user")
+        .eq("id_user", user.id)
         .single();
 
       if (userError) {
@@ -146,7 +146,7 @@ const EditarPerfil = ({ navigation }) => {
       await supabase
         .from("users")
         .update({ nome: nome })
-        .eq("id", user.id);
+        .eq("id_user", user.id);
 
       if (novoEmail !== user.email) {
         const { error: emailError } = await supabase.auth.updateUser({
